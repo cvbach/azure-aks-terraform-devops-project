@@ -1,0 +1,14 @@
+
+terraform {
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "=4.74.0"
+    }
+  }
+}
+
+provider "azurerm" {
+  subscription_id = "6f5f4050-50e7-47b8-a834-65da592adec8"
+  features {}
+}
