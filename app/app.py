@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     return {
-        "application": "Azure DevOps Platform",
+        "application": "Azure DevOps Platform V3",
         "environment": os.getenv("ENVIRONMENT", "dev"),
         "version": os.getenv("APP_VERSION", "1.0.0")
     }

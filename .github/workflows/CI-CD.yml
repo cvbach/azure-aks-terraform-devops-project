@@ -17,12 +17,8 @@ jobs:
       uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Verify Azure Login
-      run: az account show
     - name: ACR Login
       run: az acr login --name acrdevopsprojectcvbach
-    - name: Verify ACR
-      run: az acr repository list --name acrdevopsprojectcvbach
     - name: Set Image Tag
       run: echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_ENV
     - name: Build Docker Image
@@ -31,8 +27,6 @@ jobs:
       run: docker images
     - name: Push Docker Image
       run: docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:$IMAGE_TAG
-    - name: Verify ACR
-      run: az acr repository show-tags --name $ACR_NAME --repository $IMAGE_NAME
       #CD
     - name: Get AKS Credentials
       run: az aks get-credentials  --resource-group cv.bach --name aks-devops-project --overwrite-existing
