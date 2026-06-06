@@ -40,7 +40,11 @@ jobs:
       run: kubectl get nodes
     - name: Deploy to AKS
       run:
-        kubectl apply -f kubernetes/
+        kubectl apply -f kubernetes/namespace.yaml
+        kubectl apply -f kubernetes/configmap.yaml
+        kubectl apply -f kubernetes/secret.yaml
+        kubectl apply -f kubernetes/deployment.yaml
+        kubectl apply -f kubernetes/service.yaml
         kubectl set image deployment/flask-app flask-app=$ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }} -n devops-project  
     - name: Wait for Rollout
       run: kubectl rollout status deployment/flask-app -n devops-project
