@@ -23,7 +23,10 @@ jobs:
     - name: Verify ACR
       run: az acr repository list --name acrdevopsprojectcvbach
     - name: Build Docker Image
-      run: |
-       docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }} ./app
+      run: docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }} ./app
     - name: List Images
       run: docker images
+    - name: Push Docker Image
+      run: docker push $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }}
+    - name: Verify ACR
+      run: az acr repository show-tags --name $ACR_NAME --repository $IMAGE_NAME
