@@ -4,7 +4,8 @@ on:
     branches:
       - main
 env:
-  IMAGE_NAME: flask-aks
+   ACR_NAME: acrdevopsprojectcvbach
+   IMAGE_NAME: flask-aks
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,3 +22,8 @@ jobs:
       run: az acr login --name acrdevopsprojectcvbach
     - name: Verify ACR
       run: az acr repository list --name acrdevopsprojectcvbach
+    - name: Build Docker Image
+      run: |
+       docker build -t $ACR_NAME.azurecr.io/$IMAGE_NAME:${{ github.sha }} ./app
+    - name: List Images
+      run: docker images
