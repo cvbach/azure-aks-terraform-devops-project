@@ -17,3 +17,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Verify Azure Login
       run: az account show
+    - name: ACR Login
+      run: az acr login --name acrdevopsprojectcvbach
+    - name: Verify ACR
+      run: az acr repository list --name acrdevopsprojectcvbach
