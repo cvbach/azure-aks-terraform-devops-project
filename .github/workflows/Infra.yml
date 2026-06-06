@@ -1,0 +1,36 @@
+name: Build infrastructure
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform/**'
+env:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      #CI
+    - name: Checkout Code
+      uses: actions/checkout@v4
+    - name: Azure Login
+      uses: azure/login@v2
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Verify Azure Login
+      run: az account show
+    - name: Set Terraform Version
+      run: echo "TERRAFORM_VERSION=1.55.5" >> $GITHUB_ENV
+    - name: Install Terraform
+      run: |
+        curl -LO https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+        unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /usr/local/bin/
+    - name: Verify Terraform
+      run: terraform version
+    - name: Terraform Init
+      run: terraform -chdir=terraform init
+    - name: Terraform Plan
+      run: terraform -chdir=terraform plan
+    - name: Terraform Apply
+      run: terraform -chdir=terraform apply -auto-approve
+
