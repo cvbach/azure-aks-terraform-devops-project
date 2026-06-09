@@ -32,8 +32,8 @@ jobs:
       run: az aks get-credentials  --resource-group cv.bach --name aks-devops-project --overwrite-existing
     - name: Verify AKS
       run: kubectl get nodes
-    - name: Deploy Kubernetes Resources
-      run: kubectl apply -f kubernetes/
+    #- name: Deploy Kubernetes Resources
+    #  run: kubectl apply -f kubernetes/
     - name: Deploy to AKS
       run: kubectl set image deployment/flask-app flask-app=$ACR_NAME.azurecr.io/$IMAGE_NAME:$IMAGE_TAG -n devops-project
     - name: Wait for Rollout
