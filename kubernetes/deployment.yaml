@@ -21,7 +21,7 @@ spec:
       containers:
       - name: flask-app
 
-        image: acrdevopsprojectcvbach.azurecr.io/flask-aks:v1
+        image: acrdevopsprojectcvbach.azurecr.io/flask-aks:5558873
 
         ports:
         - containerPort: 5000
