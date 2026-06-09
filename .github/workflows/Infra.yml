@@ -29,5 +29,10 @@ jobs:
     - name: Terraform Apply
       run: terraform -chdir=terraform apply -auto-approve
     - name: Deploy Kubernetes Resources
-      run: kubectl apply -f kubernetes/
+      run: |
+        az aks get-credentials  --resource-group cv.bach --name aks-devops-project --overwrite-existing
+        kubectl apply -f kubernetes/configmap.yaml
+        kubectl apply -f kubernetes/secret.yaml
+        kubectl apply -f kubernetes/namespace.yaml
+        kubectl apply -f kubernetes/service.yaml
 
