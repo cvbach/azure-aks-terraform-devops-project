@@ -8,7 +8,7 @@ def home():
     return {
         "application": "Azure DevOps Platform V2",
         "environment": os.getenv("ENVIRONMENT", "dev"),
-        "version": os.getenv("APP_VERSION", "2.0.0")
+        "version": os.getenv("APP_VERSION", "1.0.0")
     }
 
 @app.route("/health")
