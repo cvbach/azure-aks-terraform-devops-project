@@ -19,5 +19,6 @@ terraform {
     storage_account_name = "stv2tfstate"
     container_name       = "tfstate"
     key                  = "aks-devops-project.tfstate"
+    use_oidc = true
   }
 }
