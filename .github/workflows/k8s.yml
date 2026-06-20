@@ -1,4 +1,4 @@
-name: Build infrastructure
+name: Configure Kubernetes Resources
 on:
   workflow_dispatch:
 permissions:
