@@ -20,8 +20,8 @@ resource "azurerm_data_protection_backup_policy_kubernetes_cluster" "policy" {
 
   default_retention_rule {
     life_cycle {
-      duration        = "P7D"
-      data_store_type = "VaultStore"
+      duration        = "P14D"
+      data_store_type = "OperationalStore"
     }
   }
 }

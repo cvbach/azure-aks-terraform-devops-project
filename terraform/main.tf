@@ -23,6 +23,7 @@ module "aks" {
   resource_group_name = data.azurerm_resources.cvbach.resource_group_name
   aks_name            = var.aks_name
   aks_subnet_id       = module.network.aks_subnet_id
+  log_analytics_workspace_id = module.monitor.workspace_id
 }
 
 module "backup" {
@@ -32,13 +33,8 @@ module "backup" {
   resource_group_name = data.azurerm_resources.cvbach.resource_group_name
 }
 
-# az aks get-credentials --resource-group cv.bach --name aks-devops-project --overwrite-existing
-# kubectl get nodes
-# kubectl get pods -A
-
-# docker build -t flask-aks:v1 .
-# docker run -p 5000:5000 flask-aks:v1
-
-# az acr login --name acrdevopsproject
-# docker tag flask-aks:v1 acrdevopsproject.azurecr.io/flask-aks:v1
-# docker push acrdevopsproject.azurecr.io/flask-aks:v1
+module "monitor" {
+  source = "./modules/monitor"
+  location            = var.region
+  resource_group_name = data.azurerm_resources.cvbach.resource_group_name
+}
